@@ -2010,6 +2010,7 @@ class CreateMaterializedViewStatementSegment(BaseSegment):
     """A `CREATE MATERIALIZED VIEW` statement.
 
     https://clickhouse.com/docs/en/sql-reference/statements/create/table/
+    https://clickhouse.com/docs/en/sql-reference/statements/create/view#refreshable-materialized-view
     """
 
     type = "create_materialized_view_statement"
@@ -2030,6 +2031,30 @@ class CreateMaterializedViewStatementSegment(BaseSegment):
         OneOf("DEFINER", "NONE"),
         optional=True,
     )
+    # An interval such as `1 HOUR` or `1 HOUR 30 MINUTE`.
+    _refresh_interval = AnyNumberOf(
+        Sequence(
+            Ref("NumericLiteralSegment"),
+            Ref("DatetimeUnitSegment"),
+        ),
+        min_times=1,
+    )
+    _refresh_clause = Sequence(
+        "REFRESH",
+        OneOf("EVERY", "AFTER"),
+        _refresh_interval,
+        Sequence("OFFSET", _refresh_interval, optional=True),
+        Sequence("RANDOMIZE", "FOR", _refresh_interval, optional=True),
+        Sequence(
+            "DEPENDS",
+            "ON",
+            Delimited(Ref("TableReferenceSegment")),
+            optional=True,
+        ),
+        Ref("SettingsClauseSegment", optional=True),
+        Sequence("APPEND", optional=True),
+        optional=True,
+    )
 
     match_grammar = Sequence(
         "CREATE",
@@ -2038,6 +2063,7 @@ class CreateMaterializedViewStatementSegment(BaseSegment):
         Ref("IfNotExistsGrammar", optional=True),
         Ref("TableReferenceSegment"),
         Ref("OnClusterClauseSegment", optional=True),
+        _refresh_clause,
         OneOf(
             Sequence(
                 "TO",
@@ -2069,6 +2095,8 @@ class CreateMaterializedViewStatementSegment(BaseSegment):
                 Sequence("POPULATE", optional=True),
             ),
         ),
+        # A refreshable view can skip its first refresh with EMPTY.
+        Sequence("EMPTY", optional=True),
         _definer_clause,
         _sql_security_clause,
         "AS",
