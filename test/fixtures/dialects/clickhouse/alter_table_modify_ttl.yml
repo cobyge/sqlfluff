@@ -1,0 +1,192 @@
+# YML test files are auto-generated from SQL files and should not be edited by
+# hand. To help enforce this, the "hash" field in the file must match a hash
+# computed by SQLFluff when running the tests. Please run
+# `python test/generate_parse_fixture_yml.py`  to generate them after adding or
+# altering SQL files.
+_hash: e3609b7c70aa5c7f34bc29b4fb619c1979082a656bb0f7caa77cc8c613e8af7b
+file:
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        naked_identifier: t
+    - keyword: MODIFY
+    - table_ttl_segment:
+        keyword: TTL
+        expression:
+          column_reference:
+            naked_identifier: d
+          binary_operator: +
+          interval_expression:
+            keyword: INTERVAL
+            numeric_literal: '1'
+            date_part: DAY
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        naked_identifier: t
+    - keyword: MODIFY
+    - table_ttl_segment:
+        keyword: TTL
+        expression:
+          column_reference:
+            naked_identifier: d
+          binary_operator: +
+          function:
+            function_name:
+              function_name_identifier: toIntervalDay
+            function_contents:
+              bracketed:
+                start_bracket: (
+                expression:
+                  numeric_literal: '1'
+                end_bracket: )
+        where_clause:
+          keyword: WHERE
+          expression:
+          - column_reference:
+              naked_identifier: s
+          - comparison_operator:
+              raw_comparison_operator: '='
+          - quoted_literal: "'a'"
+          - binary_operator: AND
+          - column_reference:
+              naked_identifier: b
+          - comparison_operator:
+              raw_comparison_operator: '='
+          - quoted_literal: "'c'"
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        naked_identifier: t
+    - keyword: MODIFY
+    - table_ttl_segment:
+      - keyword: TTL
+      - expression:
+          column_reference:
+            naked_identifier: d
+          binary_operator: +
+          interval_expression:
+            keyword: INTERVAL
+            numeric_literal: '1'
+            date_part: DAY
+      - keyword: DELETE
+      - where_clause:
+          keyword: WHERE
+          expression:
+            column_reference:
+              naked_identifier: s
+            comparison_operator:
+              raw_comparison_operator: '='
+            quoted_literal: "'a'"
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        naked_identifier: t
+    - keyword: MODIFY
+    - table_ttl_segment:
+      - keyword: TTL
+      - expression:
+          column_reference:
+            naked_identifier: d
+          binary_operator: +
+          interval_expression:
+            keyword: INTERVAL
+            numeric_literal: '1'
+            date_part: DAY
+      - keyword: TO
+      - keyword: DISK
+      - quoted_literal: "'cold'"
+      - comma: ','
+      - expression:
+          column_reference:
+            naked_identifier: d
+          binary_operator: +
+          interval_expression:
+            keyword: INTERVAL
+            numeric_literal: '2'
+            date_part: DAY
+      - keyword: DELETE
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        naked_identifier: t
+    - on_cluster_clause:
+      - keyword: 'ON'
+      - keyword: CLUSTER
+      - naked_identifier: c
+    - keyword: MODIFY
+    - table_ttl_segment:
+      - keyword: TTL
+      - expression:
+          column_reference:
+            naked_identifier: d
+          binary_operator: +
+          interval_expression:
+            keyword: INTERVAL
+            numeric_literal: '1'
+            date_part: DAY
+      - keyword: TO
+      - keyword: VOLUME
+      - quoted_literal: "'slow'"
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        naked_identifier: t
+    - keyword: MODIFY
+    - table_ttl_segment:
+        keyword: TTL
+        expression:
+          column_reference:
+            naked_identifier: d
+          binary_operator: +
+          interval_expression:
+            keyword: INTERVAL
+            numeric_literal: '1'
+            date_part: MONTH
+        groupby_clause:
+        - keyword: GROUP
+        - keyword: BY
+        - column_reference:
+            naked_identifier: k
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        naked_identifier: t
+    - keyword: MODIFY
+    - table_ttl_segment:
+        keyword: TTL
+        expression:
+          column_reference:
+            naked_identifier: d
+          binary_operator: +
+          interval_expression:
+            keyword: INTERVAL
+            numeric_literal: '1'
+            date_part: DAY
+    - settings_clause:
+        keyword: SETTINGS
+        naked_identifier: mutations_sync
+        comparison_operator:
+          raw_comparison_operator: '='
+        numeric_literal: '2'
+- statement_terminator: ;

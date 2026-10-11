@@ -3231,11 +3231,12 @@ class AlterTableStatementSegment(BaseSegment):
                 "REMOVE",
                 "TTL",
             ),
-            # ALTER TABLE ... MODIFY TTL expression
+            # ALTER TABLE ... MODIFY TTL ttl_rule [, ttl_rule ...]
+            # The same rules as the TTL clause of CREATE TABLE, so a rule can
+            # carry DELETE, TO DISK/VOLUME, WHERE or GROUP BY.
             Sequence(
                 "MODIFY",
-                "TTL",
-                Ref("ExpressionSegment"),
+                Ref("TableTTLSegment"),
             ),
             # ALTER TABLE ... MODIFY QUERY select_statement
             Sequence(

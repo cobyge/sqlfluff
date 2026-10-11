@@ -3,7 +3,7 @@
 # computed by SQLFluff when running the tests. Please run
 # `python test/generate_parse_fixture_yml.py`  to generate them after adding or
 # altering SQL files.
-_hash: 5cf24e08160edf79f76747395c309f3e1b3429ab77b31a36bdea76d476bc0c24
+_hash: 792c6fd12225673b0ced63df5195396da5bb7c0aa2d9e7754fd5ddda9cdebfbe
 file:
 - statement:
     alter_table_statement:
@@ -923,15 +923,16 @@ file:
       - keyword: CLUSTER
       - quoted_identifier: "'{cluster}'"
     - keyword: MODIFY
-    - keyword: TTL
-    - expression:
-        column_reference:
-          naked_identifier: event_time
-        binary_operator: +
-        interval_expression:
-          keyword: INTERVAL
-          numeric_literal: '3'
-          date_part: MONTH
+    - table_ttl_segment:
+        keyword: TTL
+        expression:
+          column_reference:
+            naked_identifier: event_time
+          binary_operator: +
+          interval_expression:
+            keyword: INTERVAL
+            numeric_literal: '3'
+            date_part: MONTH
 - statement_terminator: ;
 - statement:
     alter_table_statement:
