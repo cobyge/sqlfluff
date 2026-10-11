@@ -3,7 +3,7 @@
 # computed by SQLFluff when running the tests. Please run
 # `python test/generate_parse_fixture_yml.py`  to generate them after adding or
 # altering SQL files.
-_hash: 5cf24e08160edf79f76747395c309f3e1b3429ab77b31a36bdea76d476bc0c24
+_hash: a7fc954b7b41fea7d6dc1f62f1ba02a363747fa6e6020d951526c03e0482eea0
 file:
 - statement:
     alter_table_statement:
@@ -318,9 +318,11 @@ file:
         naked_identifier: x
     - keyword: RENAME
     - keyword: COLUMN
-    - naked_identifier: old_name
+    - column_reference:
+        naked_identifier: old_name
     - keyword: TO
-    - naked_identifier: new_name
+    - column_reference:
+        naked_identifier: new_name
 - statement_terminator: ;
 - statement:
     alter_table_statement:
@@ -332,9 +334,11 @@ file:
     - keyword: COLUMN
     - keyword: IF
     - keyword: EXISTS
-    - naked_identifier: old_name
+    - column_reference:
+        naked_identifier: old_name
     - keyword: TO
-    - naked_identifier: new_name
+    - column_reference:
+        naked_identifier: new_name
 - statement_terminator: ;
 - statement:
     alter_table_statement:
@@ -348,9 +352,11 @@ file:
       - quoted_identifier: "'{cluster}'"
     - keyword: RENAME
     - keyword: COLUMN
-    - naked_identifier: old_name
+    - column_reference:
+        naked_identifier: old_name
     - keyword: TO
-    - naked_identifier: new_name
+    - column_reference:
+        naked_identifier: new_name
 - statement_terminator: ;
 - statement:
     alter_table_statement:
@@ -366,9 +372,11 @@ file:
     - keyword: COLUMN
     - keyword: IF
     - keyword: EXISTS
-    - naked_identifier: old_name
+    - column_reference:
+        naked_identifier: old_name
     - keyword: TO
-    - naked_identifier: new_name
+    - column_reference:
+        naked_identifier: new_name
 - statement_terminator: ;
 - statement:
     alter_table_statement:
@@ -378,9 +386,11 @@ file:
         naked_identifier: visits
     - keyword: RENAME
     - keyword: COLUMN
-    - naked_identifier: webBrowser
+    - column_reference:
+        naked_identifier: webBrowser
     - keyword: TO
-    - naked_identifier: browser
+    - column_reference:
+        naked_identifier: browser
 - statement_terminator: ;
 - statement:
     alter_table_statement:

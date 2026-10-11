@@ -3074,9 +3074,11 @@ class AlterTableStatementSegment(BaseSegment):
                 "RENAME",
                 "COLUMN",
                 Ref("IfExistsGrammar", optional=True),
-                Ref("SingleIdentifierGrammar"),  # Column name
+                # A column reference, so a dotted Nested subcolumn name such
+                # as n.a parses.
+                Ref("ColumnReferenceSegment"),  # Column name
                 "TO",
-                Ref("SingleIdentifierGrammar"),  # New column name
+                Ref("ColumnReferenceSegment"),  # New column name
             ),
             # ALTER TABLE ... COMMENT COLUMN [IF EXISTS] name 'Text comment'
             Sequence(
