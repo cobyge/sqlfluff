@@ -3,7 +3,7 @@
 # computed by SQLFluff when running the tests. Please run
 # `python test/generate_parse_fixture_yml.py`  to generate them after adding or
 # altering SQL files.
-_hash: 5cf24e08160edf79f76747395c309f3e1b3429ab77b31a36bdea76d476bc0c24
+_hash: f56d379f3ba1e289b59a0655d9ac2bc97dd8d6f12b6bf5d65469200f7800c849
 file:
 - statement:
     alter_table_statement:
@@ -2580,4 +2580,95 @@ file:
           comma: ','
           numeric_literal: '1'
           end_bracket: )
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        naked_identifier: x
+    - keyword: ADD
+    - keyword: COLUMN
+    - naked_identifier: a
+    - data_type:
+        data_type_identifier: String
+    - comma: ','
+    - keyword: ADD
+    - keyword: COLUMN
+    - naked_identifier: b
+    - data_type:
+        data_type_identifier: UInt8
+    - keyword: DEFAULT
+    - expression:
+        numeric_literal: '0'
+    - keyword: AFTER
+    - naked_identifier: a
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        naked_identifier: x
+    - on_cluster_clause:
+      - keyword: 'ON'
+      - keyword: CLUSTER
+      - naked_identifier: c
+    - keyword: ADD
+    - keyword: COLUMN
+    - naked_identifier: a
+    - data_type:
+        data_type_identifier: String
+    - comma: ','
+    - keyword: DROP
+    - keyword: COLUMN
+    - naked_identifier: b
+    - comma: ','
+    - keyword: MODIFY
+    - keyword: COLUMN
+    - naked_identifier: c
+    - data_type:
+        struct_type:
+          keyword: Tuple
+          tuple_type_schema:
+            bracketed:
+            - start_bracket: (
+            - naked_identifier: d
+            - data_type:
+                data_type_identifier: Bool
+            - comma: ','
+            - naked_identifier: e
+            - data_type:
+                data_type_identifier: Array
+                bracketed_arguments:
+                  bracketed:
+                    start_bracket: (
+                    data_type:
+                      data_type_identifier: String
+                    end_bracket: )
+            - end_bracket: )
+    - settings_clause:
+        keyword: SETTINGS
+        naked_identifier: mutations_sync
+        comparison_operator:
+          raw_comparison_operator: '='
+        numeric_literal: '2'
+- statement_terminator: ;
+- statement:
+    alter_table_statement:
+    - keyword: ALTER
+    - keyword: TABLE
+    - table_reference:
+        naked_identifier: x
+    - keyword: RENAME
+    - keyword: COLUMN
+    - quoted_identifier: '`n.a`'
+    - keyword: TO
+    - quoted_identifier: '`n.b`'
+    - comma: ','
+    - keyword: RENAME
+    - keyword: COLUMN
+    - naked_identifier: c
+    - keyword: TO
+    - naked_identifier: d
 - statement_terminator: ;
