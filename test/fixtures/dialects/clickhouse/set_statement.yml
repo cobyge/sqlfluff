@@ -1,0 +1,78 @@
+# YML test files are auto-generated from SQL files and should not be edited by
+# hand. To help enforce this, the "hash" field in the file must match a hash
+# computed by SQLFluff when running the tests. Please run
+# `python test/generate_parse_fixture_yml.py`  to generate them after adding or
+# altering SQL files.
+_hash: 4fe85c19598ded0365b6c21b8f9d1dbc1a553709937f0acaffdde98b27962b19
+file:
+- statement:
+    set_statement:
+      keyword: SET
+      naked_identifier: mutations_sync
+      comparison_operator:
+        raw_comparison_operator: '='
+      expression:
+        numeric_literal: '3'
+- statement_terminator: ;
+- statement:
+    set_statement:
+    - keyword: SET
+    - naked_identifier: max_threads
+    - comparison_operator:
+        raw_comparison_operator: '='
+    - expression:
+        numeric_literal: '8'
+    - comma: ','
+    - naked_identifier: allow_experimental_json_type
+    - comparison_operator:
+        raw_comparison_operator: '='
+    - expression:
+        numeric_literal: '1'
+- statement_terminator: ;
+- statement:
+    set_statement:
+      keyword: SET
+      naked_identifier: send_logs_level
+      comparison_operator:
+        raw_comparison_operator: '='
+      expression:
+        quoted_literal: "'trace'"
+- statement_terminator: ;
+- statement:
+    set_statement:
+      keyword: SET
+      naked_identifier: use_query_cache
+      comparison_operator:
+        raw_comparison_operator: '='
+      expression:
+        boolean_literal: 'true'
+- statement_terminator: ;
+- statement:
+    set_statement:
+      keyword: SET
+      naked_identifier: some_setting
+      comparison_operator:
+        raw_comparison_operator: '='
+      expression:
+        numeric_literal:
+          sign_indicator: '-'
+          numeric_literal: '1'
+- statement_terminator: ;
+- statement:
+    set_statement:
+      keyword: SET
+      naked_identifier: custom_x
+      comparison_operator:
+        raw_comparison_operator: '='
+      expression:
+        numeric_literal: '1.5'
+- statement_terminator: ;
+- statement:
+    set_statement:
+      keyword: SET
+      naked_identifier: custom_n
+      comparison_operator:
+        raw_comparison_operator: '='
+      expression:
+        null_literal: 'NULL'
+- statement_terminator: ;

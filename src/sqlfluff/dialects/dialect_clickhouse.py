@@ -2785,6 +2785,26 @@ class SystemUnfreezeSegment(BaseSegment):
     )
 
 
+class SetStatementSegment(BaseSegment):
+    """A `SET` statement that sets one or more session settings.
+
+    https://clickhouse.com/docs/sql-reference/statements/set
+    """
+
+    type = "set_statement"
+
+    match_grammar = Sequence(
+        "SET",
+        Delimited(
+            Sequence(
+                Ref("NakedIdentifierSegment"),
+                Ref("EqualsSegment"),
+                Ref("ExpressionSegment"),
+            ),
+        ),
+    )
+
+
 class SystemStatementSegment(BaseSegment):
     """A `SYSTEM ...` statement.
 
@@ -3346,6 +3366,7 @@ class StatementSegment(ansi.StatementSegment):
             Ref("DropQuotaStatementSegment"),
             Ref("DropSettingProfileStatementSegment"),
             Ref("SystemStatementSegment"),
+            Ref("SetStatementSegment"),
             Ref("RenameStatementSegment"),
             Ref("AlterTableStatementSegment"),
             Ref("ExchangeTablesStatementSegment"),
